@@ -10,6 +10,7 @@ public class Cart implements CustomerService {
 
     private double totalprice;
     protected ArrayList<Game> itemInCart;
+    private String gameName;
     
     public Cart() {
         itemInCart = new ArrayList<>();
@@ -56,6 +57,7 @@ public class Cart implements CustomerService {
         try {
             for (int i = 0; i < gameStore.getGames().size(); i++) {
                 if (gameStore.getGames().get(i).getTitle().equals(title)) {
+                    this.gameName = gameStore.getGames().get(i).getTitle();
                     this.itemInCart.add(gameStore.getGames().get(i));
                     System.out.println("คุณได้เพิ่มเกม "+gameStore.getGames().get(i).getTitle()+" ลงตระกร้า!");
                     return true;
@@ -97,5 +99,15 @@ public class Cart implements CustomerService {
         return false;
 
     }
+
+    public ArrayList<Game> getItemInCart() {
+        return itemInCart;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+
 
 }

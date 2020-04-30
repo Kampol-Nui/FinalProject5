@@ -2,13 +2,7 @@ package service;
 
 
 import game.Game;
-import service.CustomerAccount;
 import dataaccess.DBmanager;
-import dataaccess.DBconnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class GameLibrary {
@@ -28,7 +22,7 @@ public class GameLibrary {
             this.myGameLibrary = (ArrayList<Game>) ac.getMyCart().itemInCart.clone();
             double oldmoney = dataaccess.DBconnection.SelectLastMoney(ac.getUniqueId());
             ac.myMoney = dataaccess.DBconnection.SelectLastMoney(ac.getUniqueId()) - ac.getMyCart().getTotalprice();
-            DBmanager.StoreGame(ac);
+            DBmanager.PurchaseGame(ac);
             ac.getMyCart().itemInCart.clear();
             System.out.println("ยอดเงินคงเหลือหลังชำระ : " + ac.getMyMoney() + " ยอดเงินก่อนชำระ : " + oldmoney);
         } else {

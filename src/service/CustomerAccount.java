@@ -10,7 +10,7 @@ import account.AccountStatus;
 
 public class CustomerAccount extends Account {
     
-    private double uniqueId;
+    private long uniqueId;
     private Cart myCart;
     private GameLibrary myLibrary;
     private double topupMoney = 0;
@@ -52,12 +52,12 @@ public class CustomerAccount extends Account {
         }
     }
     
-    public double getUniqueId() {
+    public long getUniqueId() {
         return uniqueId;
     }
     
     public void listBuyingHistory() {
-        DBmanager.SelectBuyingHistory(this);
+        DBmanager.SelectPurchaseHistory(this);
     }
     
     public GameLibrary getMyLibrary() {

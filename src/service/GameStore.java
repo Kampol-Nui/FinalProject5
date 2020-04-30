@@ -84,7 +84,6 @@ public class GameStore implements AdminService{
     @Override
     public boolean removeGame(AdminAccount admin, Game game) {
         try {
-            Objects.requireNonNull(admin, "AdminAccount cannot be null");
             if (game == null) {
                 System.out.println("Game is Not Null");
                 return false;
