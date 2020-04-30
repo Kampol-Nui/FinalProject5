@@ -1,0 +1,51 @@
+package service;
+
+
+import game.Game;
+import service.CustomerAccount;
+import dataaccess.DBmanager;
+import dataaccess.DBconnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+public class GameLibrary {
+
+    private ArrayList<Game> myGameLibrary;
+    private CustomerAccount ac;
+
+    public GameLibrary(CustomerAccount ac) {
+        this.ac = ac;
+        this.myGameLibrary = new ArrayList<>();
+    }
+
+    public void addGameFromCartToLibrary() {
+
+        ac.getMyCart().calculateTotalPrice();
+        if (ac.getMyCart().getTotalprice() <= dataaccess.DBconnection.SelectLastMoney(ac.getUniqueId())) {
+            this.myGameLibrary = (ArrayList<Game>) ac.getMyCart().itemInCart.clone();
+            double oldmoney = dataaccess.DBconnection.SelectLastMoney(ac.getUniqueId());
+            ac.myMoney = dataaccess.DBconnection.SelectLastMoney(ac.getUniqueId()) - ac.getMyCart().getTotalprice();
+            DBmanager.StoreGame(ac);
+            ac.getMyCart().itemInCart.clear();
+            System.out.println("ยอดเงินคงเหลือหลังชำระ : " + ac.getMyMoney() + " ยอดเงินก่อนชำระ : " + oldmoney);
+        } else {
+            System.out.println("จำนวนเงินในกระเป๋าของคุณไม่เพียงพอ โปรดเติมเงินของคุณ");
+        }
+
+    }
+
+    public ArrayList<Game> getMyGameLibrary() {
+        try {
+            System.out.println("************************ MY Library *************************");
+            return this.myGameLibrary;
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+
+    }
+
+}

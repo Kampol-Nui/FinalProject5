@@ -1,3 +1,5 @@
+package genarate;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 public class GetNextID {
