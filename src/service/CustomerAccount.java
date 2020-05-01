@@ -47,7 +47,7 @@ public class CustomerAccount extends Account {
             System.out.println("Please insert your money");
             
         } else {
-            this.myMoney = this.topupMoney ;
+            this.myMoney += this.topupMoney ;
             DBmanager.topupMoney(this);
         }
     }

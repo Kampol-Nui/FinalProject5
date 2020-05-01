@@ -41,6 +41,7 @@ public class DBmanager {
     }
 
     public static void topupMoney(CustomerAccount ac) {
+        double lastMoney;
         String sql1 = "INSERT INTO TOPUPBIll " + "(timestamp,id,username,topup,topupstatus)" + "VALUES(?,?,?,?,?)";
         //String sql2 = "UPDATE CUSTOMERACCOUNT set mymoney=" + ac.getMyMoney() + " WHERE id =" + ac.getUniqueId();
         try (Connection con = DBconnection.getConnecting();) {
@@ -52,12 +53,13 @@ public class DBmanager {
                 stm.setDouble(4, ac.getTopupMoney());
                 stm.setString(5, TopupStatus.SUCCESSFUL.name());
                 stm.executeUpdate();
-                //stm2.executeUpdate();
-                double lastMoney = ac.getTopupMoney()+ SelectLastMoney(ac);
-                String sql2 = "UPDATE CUSTOMERACCOUNT set mymoney=" + lastMoney + " WHERE id =" + ac.getUniqueId();
+                lastMoney = ac.getTopupMoney()+ SelectLastMoney(ac);
+                System.out.println(lastMoney);
+                String sql2 = "UPDATE CUSTOMERACCOUNT set MYMONEY=" + lastMoney + " WHERE id =" + ac.getUniqueId();
                 try (Statement stmm = con.createStatement();) {
                     stmm.executeUpdate(sql2);
                     System.out.println("เติมเงินเสร็จสมบูรณ์");
+                    
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -111,7 +113,7 @@ public class DBmanager {
             } catch (SQLException ex) {
                 ex.getMessage();
             }
-            String sql2 = "UPDATE CUSTOMERACCOUNT set mymoney=" + ac.getMyMoney() + " WHERE id =" + ac.getUniqueId();
+            String sql2 = "UPDATE CUSTOMERACCOUNT set MYMONEY=" + ac.getMyMoney() + " WHERE id =" + ac.getUniqueId();
             try (Statement stm = con.createStatement();) {
                 stm.executeUpdate(sql2);
                 System.out.println("ชำระเงินเสร็จสมบูรณ์ โปรดตรวจสอบ Library ของคุณหลังชำระเงิน ");

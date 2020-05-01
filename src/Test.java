@@ -93,12 +93,13 @@ public class Test {
 
         cus1.TopupMoney(1000);
         System.out.println(cus1.getMyMoney());
-        cus2.TopupMoney(2040);
-        System.out.println(cus2.getMyMoney());
-                cus1.TopupMoney(500);
+        System.out.println("");
+        cus1.TopupMoney(2040);
         System.out.println(cus1.getMyMoney());
-        cus2.TopupMoney(50);
-        System.out.println(cus2.getMyMoney());
+//        cus1.TopupMoney(500);
+//        System.out.println(cus1.getMyMoney());
+//        cus2.TopupMoney(50);
+//        System.out.println(cus2.getMyMoney());
 //        cus2.getMyLibrary().addGameFromCartToLibrary();
 //        System.out.println("-----------------------------------------------------------------");
 //        
