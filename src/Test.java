@@ -19,6 +19,7 @@ import service.CustomerAccount;
 public class Test {
 
     public static void main(String[] args) {
+        dataaccess.DBmanager.CreateTable();
         GameStore gameStore = new GameStore("PROJECT GAME STORE");
         GameStore gameStore2 = new GameStore("ORIJUN");
         Person person = new Person("Kumpol", "kumpol@gmail.com", "0945481112");
@@ -35,8 +36,8 @@ public class Test {
         CustomerAccount cus1 = new CustomerAccount("asdas", "asdasd", AccountStatus.ACTIVE, person2);
         CustomerAccount cus2 = new CustomerAccount("customer2", "testpass", AccountStatus.ACTIVE, person3);
 
-//        cus1.TopupMoney(800);
-        //cus2.TopupMoney(1000);
+        cus1.TopupMoney(800);
+        cus2.TopupMoney(1000);
         AdminAccount admin = new AdminAccount("NobodyFound", "007", person);
         AdminAccount admin2 = new AdminAccount("NobodyFound", "007", person);
 
@@ -126,6 +127,7 @@ public class Test {
         AllCustomer all = new AllCustomer(cusall);
         admin.WriteCustomerData(admin,all);
         admin.readCustomer(admin, "file_.dat");
+        
     }    
 }
 

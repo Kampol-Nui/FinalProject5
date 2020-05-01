@@ -30,7 +30,7 @@ public class CustomerAccount extends Account {
     }
     
     public double getMyMoney() {
-        return this.myMoney = dataaccess.DBconnection.SelectLastMoney(getUniqueId());
+        return this.myMoney ;
     }
     
     public double getTopupMoney() {
@@ -47,7 +47,7 @@ public class CustomerAccount extends Account {
             System.out.println("Please insert your money");
             
         } else {
-            this.myMoney = this.topupMoney + dataaccess.DBconnection.SelectLastMoney(getUniqueId());
+            this.myMoney = this.topupMoney ;
             DBmanager.topupMoney(this);
         }
     }
