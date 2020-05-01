@@ -19,7 +19,7 @@ import service.CustomerAccount;
 public class Test {
 
     public static void main(String[] args) {
-        dataaccess.DBmanager.CreateTable();
+        //dataaccess.DBmanager.CreateTable();
         GameStore gameStore = new GameStore("PROJECT GAME STORE");
         GameStore gameStore2 = new GameStore("ORIJUN");
         Person person = new Person("Kumpol", "kumpol@gmail.com", "0945481112");
@@ -94,17 +94,17 @@ public class Test {
         cus1.TopupMoney(1000);
         System.out.println(cus1.getMyMoney());
         System.out.println("");
-        cus1.TopupMoney(2040);
+        //cus1.TopupMoney(2040);
         System.out.println(cus1.getMyMoney());
 //        cus1.TopupMoney(500);
 //        System.out.println(cus1.getMyMoney());
 //        cus2.TopupMoney(50);
 //        System.out.println(cus2.getMyMoney());
-//        cus2.getMyLibrary().addGameFromCartToLibrary();
-//        System.out.println("-----------------------------------------------------------------");
+        cus2.getMyLibrary().addGameFromCartToLibrary();
+        System.out.println("-----------------------------------------------------------------");
 //        
-//        cus1.getMyLibrary().addGameFromCartToLibrary();
-//        System.out.println("-----------------------------------------------------------------");
+        cus1.getMyLibrary().addGameFromCartToLibrary();
+        System.out.println("-----------------------------------------------------------------");
 
 
 //        lb2.payGame(cus2);

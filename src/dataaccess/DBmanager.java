@@ -97,7 +97,7 @@ public class DBmanager {
     }
 
     public static void PurchaseGame(CustomerAccount ac) {
-        String sql1 = "INSERT INTO PURCHASEHISTORY " + "(timestamp,id,username,game,totalprice,mymoney)" + "VALUES(?,?,?,?,?)";
+        String sql1 = "INSERT INTO PURCHASEHISTORY " + "(timestamp,id,username,game,totalprice,mymoney)" + "VALUES(?,?,?,?,?,?)";
         try (Connection con = DBconnection.getConnecting();) {
             try (
                     PreparedStatement pstm = con.prepareStatement(sql1);) {
@@ -123,6 +123,34 @@ public class DBmanager {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+//        double lastMoney;
+//        String sql1 = "INSERT INTO PURCHASEHISTORY " + "(timestamp,id,username,game,totalprice,mymoney)" + "VALUES(?,?,?,?,?)";
+//        //String sql2 = "UPDATE CUSTOMERACCOUNT set mymoney=" + ac.getMyMoney() + " WHERE id =" + ac.getUniqueId();
+//        try (Connection con = DBconnection.getConnecting();) {
+//            try (
+//                    PreparedStatement stm = con.prepareStatement(sql1);) {
+//                stm.setString(1, new TimeStamp().toString());
+//                stm.setLong(2, ac.getUniqueId());
+//                stm.setString(3, ac.getUsername());
+//                stm.setDouble(4, ac.getTopupMoney());
+//                stm.setString(5, TopupStatus.SUCCESSFUL.name());
+//                stm.executeUpdate();
+//                lastMoney = ac.getTopupMoney()+ SelectLastMoney(ac);
+//                System.out.println(lastMoney);
+//                String sql2 = "UPDATE CUSTOMERACCOUNT set MYMONEY=" + lastMoney + " WHERE id =" + ac.getUniqueId();
+//                try (Statement stmm = con.createStatement();) {
+//                    stmm.executeUpdate(sql2);
+//                    System.out.println("เติมเงินเสร็จสมบูรณ์");
+//                    
+//                } catch (SQLException ex) {
+//                    System.out.println(ex.getMessage());
+//                }
+//            } catch (SQLException ex) {
+//                ex.getMessage();
+//            }
+//        } catch (SQLException ex) {
+//            ex.getMessage();
+//        }
     }
 
     public static double SelectLastMoney(CustomerAccount ac) {
@@ -131,9 +159,9 @@ public class DBmanager {
                 Statement stm = con.createStatement();) {
             ResultSet rs = null;
 
-            String query = ("SELECT * FROM CUSTOMERACCOUNT C1 WHERE C1.ORDER_NUMBER=(SELECT MAX(ORDER_NUMBER) FROM CUSTOMERACCOUNT C2 WHERE C1.ID = C2.ID) AND id=" + ac.getUniqueId());
-
-            rs = stm.executeQuery(query);
+            //String query = ("SELECT * FROM CUSTOMERACCOUNT C1 WHERE C1.ORDER_NUMBER=(SELECT MAX(ORDER_NUMBER) FROM CUSTOMERACCOUNT C2 WHERE C1.ID = C2.ID) AND id=" + ac.getUniqueId());
+            String query2 = "SELECT * FROM CUSTOMERACCOUNT WHERE ID="+ac.getUniqueId();
+            rs = stm.executeQuery(query2);
 
             if (rs.next()) {
 
@@ -158,15 +186,23 @@ public class DBmanager {
                 stm.executeUpdate("DROP TABLE TOPUPBILL");
             } catch (SQLException ex) {
             }
+            try {
+                stm.executeUpdate("DROP TABLE PURCHASEHISTORY");
+            } catch (SQLException ex) {
+            }
             //try {stm.executeUpdate("CREATE TABLE customer (cus_id INT NOT NULL, cus_name VARCHAR(100),PRIMARY KEY (cus_id))");} catch (SQLException ex) {} 
             try {
-                stm.executeUpdate("CREATE TABLE CUSTOMERACCOUNT (ORDER_NUMBER INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1,INCREMENT BY 1),"
-                        + " ID BIGINT,USERNAME VARCHAR(50),PASSWORD VARCHAR(50),MYMONEY DOUBLE)");
+                stm.executeUpdate("CREATE TABLE CUSTOMERACCOUNT (ID BIGINT not null primary key,USERNAME VARCHAR(50),PASSWORD VARCHAR(50),MYMONEY DOUBLE)");
             } catch (SQLException ex) {
             }
             try {
                 stm.executeUpdate("CREATE TABLE TOPUPBILL (ORDER_NUMBER INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1,INCREMENT BY 1),"
                         + " TIMESTAMP VARCHAR(50),ID BIGINT,USERNAME VARCHAR(50),TOPUP DOUBLE,TOPUPSTATUS VARCHAR(50))");
+            } catch (SQLException ex) {
+            }
+            try {
+                stm.executeUpdate("CREATE TABLE PURCHASEHISTORY (ORDER_NUMBER INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1,INCREMENT BY 1),"
+                        + " TIMESTAMP VARCHAR(50),ID BIGINT,USERNAME VARCHAR(50),GAME VARCHAR(50),TOTALPRICE DOUBLE,MYMONEY DOUBLE)");
             } catch (SQLException ex) {
             }
         } catch (SQLException ex) {
