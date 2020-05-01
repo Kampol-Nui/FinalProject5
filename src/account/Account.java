@@ -6,7 +6,6 @@ package account;
 import person.Person;
 import java.util.Objects;
 
-//asdasd
 public abstract class Account {
     private String username;
     private String password;

@@ -18,10 +18,10 @@ public class GameLibrary {
     public void addGameFromCartToLibrary() {
 
         ac.getMyCart().calculateTotalPrice();
-        if (ac.getMyCart().getTotalprice() <= dataaccess.DBconnection.SelectLastMoney(ac.getUniqueId())) {
+        if (ac.getMyCart().getTotalprice() <= dataaccess.DBmanager.SelectLastMoney(ac)) {
             this.myGameLibrary = (ArrayList<Game>) ac.getMyCart().itemInCart.clone();
-            double oldmoney = dataaccess.DBconnection.SelectLastMoney(ac.getUniqueId());
-            ac.myMoney = dataaccess.DBconnection.SelectLastMoney(ac.getUniqueId()) - ac.getMyCart().getTotalprice();
+            double oldmoney = dataaccess.DBmanager.SelectLastMoney(ac);
+            ac.myMoney = dataaccess.DBmanager.SelectLastMoney(ac) - ac.getMyCart().getTotalprice();
             DBmanager.PurchaseGame(ac);
             ac.getMyCart().itemInCart.clear();
             System.out.println("ยอดเงินคงเหลือหลังชำระ : " + ac.getMyMoney() + " ยอดเงินก่อนชำระ : " + oldmoney);

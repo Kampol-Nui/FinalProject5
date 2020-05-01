@@ -36,8 +36,6 @@ public class Test {
         CustomerAccount cus1 = new CustomerAccount("asdas", "asdasd", AccountStatus.ACTIVE, person2);
         CustomerAccount cus2 = new CustomerAccount("customer2", "testpass", AccountStatus.ACTIVE, person3);
 
-        cus1.TopupMoney(800);
-        cus2.TopupMoney(1000);
         AdminAccount admin = new AdminAccount("NobodyFound", "007", person);
         AdminAccount admin2 = new AdminAccount("NobodyFound", "007", person);
 
@@ -93,13 +91,19 @@ public class Test {
 //        System.out.println("                                                                   ");
         
 
-//        cus1.TopupMoney(1000);
-//        System.out.println(cus1.getMyMoney());
-        cus2.getMyLibrary().addGameFromCartToLibrary();
-        System.out.println("-----------------------------------------------------------------");
-        
-        cus1.getMyLibrary().addGameFromCartToLibrary();
-        System.out.println("-----------------------------------------------------------------");
+        cus1.TopupMoney(1000);
+        System.out.println(cus1.getMyMoney());
+        cus2.TopupMoney(2040);
+        System.out.println(cus2.getMyMoney());
+                cus1.TopupMoney(500);
+        System.out.println(cus1.getMyMoney());
+        cus2.TopupMoney(50);
+        System.out.println(cus2.getMyMoney());
+//        cus2.getMyLibrary().addGameFromCartToLibrary();
+//        System.out.println("-----------------------------------------------------------------");
+//        
+//        cus1.getMyLibrary().addGameFromCartToLibrary();
+//        System.out.println("-----------------------------------------------------------------");
 
 
 //        lb2.payGame(cus2);
@@ -108,10 +112,10 @@ public class Test {
         //lb2.payGame(cus2);
 //        System.out.println(c1.getTotalprice());
 //        System.out.println(cus1.getMyMoney());
-        System.out.println("");
-        System.out.println(cus1.getMyLibrary().getMyGameLibrary());
-        System.out.println(cus2.getMyLibrary().getMyGameLibrary());
-        cus2.listBuyingHistory();
+//        System.out.println("");
+//        System.out.println(cus1.getMyLibrary().getMyGameLibrary());
+//        System.out.println(cus2.getMyLibrary().getMyGameLibrary());
+//        cus2.listBuyingHistory();
         //System.out.println(lb1.getMyGameLibrary(cus2));
         // dataaccess.DBconnection.SelectLastMoney(cus1.getUniqueId());
 
@@ -123,10 +127,10 @@ public class Test {
 //        c1.listGameFromCart();
         // cus1.addCustomerToServer(500,"Nui","1231231",c1);
         // System.out.println(lb1.getMyGameLibrary(null));
-        CustomerAccount cusall[]= {cus1,cus2};
-        AllCustomer all = new AllCustomer(cusall);
-        admin.WriteCustomerData(admin,all);
-        admin.readCustomer(admin, "file_.dat");
+//        CustomerAccount cusall[]= {cus1,cus2};
+//        AllCustomer all = new AllCustomer(cusall);
+//        admin.WriteCustomerData(admin,all);
+//        admin.readCustomer(admin, "file_.dat");
         
     }    
 }

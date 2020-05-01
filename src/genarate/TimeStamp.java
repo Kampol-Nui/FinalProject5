@@ -11,12 +11,17 @@ public class TimeStamp {
     public TimeStamp(){
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        TimeStamp.formattedDate = dateTime.format(myFormat);
+        formattedDate = dateTime.format(myFormat);
+        
     }
 
-    public static String getFormattedDate() {
+    @Override
+    public String toString() {
         return formattedDate;
     }
+
+
+    
 
 
 }

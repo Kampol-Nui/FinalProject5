@@ -26,25 +26,5 @@ public class DBconnection {
         return conn;
     }
 
-    public static double SelectLastMoney(double id) {
-        double money = 0;
-        try (Connection con = DBconnection.getConnecting();
-                Statement stm = con.createStatement();) {
-            ResultSet rs = null;
 
-            String query = ("SELECT * FROM CUSTOMERACCOUNT C1 WHERE C1.ORDER_NUMBER=(SELECT MAX(ORDER_NUMBER) FROM CUSTOMERACCOUNT C2 WHERE C1.ID = C2.ID) AND id=" + id);
-
-            rs = stm.executeQuery(query);
-
-            if (rs.next()) {
-
-                money = rs.getDouble("MYMONEY");
-
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return money;
-    }
 }
