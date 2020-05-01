@@ -159,12 +159,12 @@ public class DBmanager {
             //try {stm.executeUpdate("CREATE TABLE customer (cus_id INT NOT NULL, cus_name VARCHAR(100),PRIMARY KEY (cus_id))");} catch (SQLException ex) {} 
             try {
                 stm.executeUpdate("CREATE TABLE CUSTOMERACCOUNT (ORDER_NUMBER INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1,INCREMENT BY 1),"
-                        + " ID DOUBLE,USERNAME VARCHAR(50),PASSWORD VARCHAR(50),MYMONEY DOUBLE)");
+                        + " ID BIGINT,USERNAME VARCHAR(50),PASSWORD VARCHAR(50),MYMONEY DOUBLE)");
             } catch (SQLException ex) {
             }
             try {
                 stm.executeUpdate("CREATE TABLE TOPUPBILL (ORDER_NUMBER INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1,INCREMENT BY 1),"
-                        + " TIMESTAMP VARCHAR(50),ID DOUBLE,USERNAME VARCHAR(50),TOPUP DOUBLE,TOPUPSTATUS VARCHAR(50))");
+                        + " TIMESTAMP VARCHAR(50),ID BIGINT,USERNAME VARCHAR(50),TOPUP DOUBLE,TOPUPSTATUS VARCHAR(50))");
             } catch (SQLException ex) {
             }
         } catch (SQLException ex) {
