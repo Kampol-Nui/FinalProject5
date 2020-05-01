@@ -19,7 +19,7 @@ import service.CustomerAccount;
 public class Test {
 
     public static void main(String[] args) {
-        //dataaccess.DBmanager.CreateTable();
+        dataaccess.DBmanager.CreateTable();
         GameStore gameStore = new GameStore("PROJECT GAME STORE");
         GameStore gameStore2 = new GameStore("ORIJUN");
         Person person = new Person("Kumpol", "kumpol@gmail.com", "0945481112");

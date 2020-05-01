@@ -6,20 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import service.CustomerAccount;
 import service.TopupStatus;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author MINI
- */
+
 public class DBmanager {
 
     public static void keepCustomerInfo(CustomerAccount ac) {
@@ -53,13 +43,13 @@ public class DBmanager {
                 stm.setDouble(4, ac.getTopupMoney());
                 stm.setString(5, TopupStatus.SUCCESSFUL.name());
                 stm.executeUpdate();
-                lastMoney = ac.getTopupMoney()+ SelectLastMoney(ac);
+                lastMoney = ac.getTopupMoney() + SelectLastMoney(ac);
                 System.out.println(lastMoney);
                 String sql2 = "UPDATE CUSTOMERACCOUNT set MYMONEY=" + lastMoney + " WHERE id =" + ac.getUniqueId();
                 try (Statement stmm = con.createStatement();) {
                     stmm.executeUpdate(sql2);
                     System.out.println("เติมเงินเสร็จสมบูรณ์");
-                    
+
                 } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -160,7 +150,7 @@ public class DBmanager {
             ResultSet rs = null;
 
             //String query = ("SELECT * FROM CUSTOMERACCOUNT C1 WHERE C1.ORDER_NUMBER=(SELECT MAX(ORDER_NUMBER) FROM CUSTOMERACCOUNT C2 WHERE C1.ID = C2.ID) AND id=" + ac.getUniqueId());
-            String query2 = "SELECT * FROM CUSTOMERACCOUNT WHERE ID="+ac.getUniqueId();
+            String query2 = "SELECT * FROM CUSTOMERACCOUNT WHERE ID=" + ac.getUniqueId();
             rs = stm.executeQuery(query2);
 
             if (rs.next()) {
@@ -208,5 +198,36 @@ public class DBmanager {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+
+    }
+
+    public static void selectAllCustomer() {
+        long id = 0;
+        String username = null;
+        String password = null;
+        double myMoney = 0;
+        try (Connection con = DBconnection.getConnecting();
+                Statement stm = con.createStatement();) {
+            ResultSet rs = null;
+
+            String query = "SELECT * FROM CUSTOMERACCOUNT";
+            rs = stm.executeQuery(query);
+
+            while (rs.next()) {
+                id = rs.getLong("ID");
+                username = rs.getString("USERNAME");
+                password = rs.getString("PASSWORD");
+                myMoney = rs.getDouble("MYMONEY");
+            }
+            System.out.println("========================================================================");
+            System.out.println(String.format("%10s %s %20s %s %20s %s %10s " , "ID", "|", "USERNAME", "|", "PASSWORD", "|", "MYMONEY"));
+            System.out.println("========================================================================");
+            System.out.println(String.format("%10s %s %20s %s %20s %s %s ", id, "|", username, "|", password, "|", myMoney));
+            System.out.println("------------------------------------------------------------------------");
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 }
